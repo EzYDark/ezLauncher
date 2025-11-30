@@ -1,0 +1,18 @@
+[package]
+name = "ezlauncher"
+version = "0.2.0"
+authors = ["EzYDark <ezydark@protonmail.com>"]
+edition = "2024"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+dioxus = { version = "0.7.1", features = [] }
+dioxus-desktop = "0.7.1"
+anyhow = "1.0.100"
+
+[features]
+default = ["desktop"]
+web = ["dioxus/web"]
+desktop = ["dioxus/desktop"]
+mobile = ["dioxus/mobile"]
