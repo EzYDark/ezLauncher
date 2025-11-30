@@ -5,8 +5,6 @@ const MINECRAFTER_REG: Asset = asset!("/assets/fonts/Minecrafter/Minecrafter_Reg
 
 const MINECRAFTIA_REG: Asset = asset!("/assets/fonts/Minecraftia/Minecraftia_Regular.ttf");
 
-const IBM_PLEX_REG: Asset = asset!("/assets/fonts/IBM_Plex/IBMPlexSans-Regular.woff2");
-
 const LILEX_REG: Asset = asset!("/assets/fonts/Lilex/Lilex-Regular.ttf");
 
 #[component]
@@ -47,18 +45,6 @@ pub fn LoadFonts() -> Element {
         MINECRAFTIA_REG
     );
 
-    let ibm_plex_reg_font_face = format!(
-        r#"
-        @font-face {{
-            font-family: "IBM_Plex";
-            src: url("{}") format("woff2");
-            font-weight: normal;
-            font-style: normal;
-        }}
-        "#,
-        IBM_PLEX_REG
-    );
-
     let lilex_reg_font_face = format!(
         r#"
         @font-face {{
@@ -75,7 +61,6 @@ pub fn LoadFonts() -> Element {
         style { "{minecrafter_alt_font_face}" }
         style { "{minecrafter_reg_font_face}" }
         style { "{minecraftia_reg_font_face}" }
-        style { "{ibm_plex_reg_font_face}" }
         style { "{lilex_reg_font_face}" }
     }
 }

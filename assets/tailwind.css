@@ -226,6 +226,9 @@
   .h-8 {
     height: calc(var(--spacing) * 8);
   }
+  .h-10 {
+    height: calc(var(--spacing) * 10);
+  }
   .h-\[calc\(100\%\+4px\)\] {
     height: calc(100% + 4px);
   }
@@ -253,6 +256,9 @@
   .w-8 {
     width: calc(var(--spacing) * 8);
   }
+  .w-10 {
+    width: calc(var(--spacing) * 10);
+  }
   .w-\[calc\(100\%\+4px\)\] {
     width: calc(100% + 4px);
   }
@@ -261,6 +267,9 @@
   }
   .w-screen {
     width: 100vw;
+  }
+  .flex-1 {
+    flex: 1;
   }
   .border-collapse {
     border-collapse: collapse;
