@@ -50,7 +50,7 @@ pub fn LoadFonts() -> Element {
     let ibm_plex_reg_font_face = format!(
         r#"
         @font-face {{
-            font-family: "IBM Plex";
+            font-family: "IBM_Plex";
             src: url("{}") format("woff2");
             font-weight: normal;
             font-style: normal;
