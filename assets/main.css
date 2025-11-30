@@ -2,4 +2,11 @@ body {
     background-color: var(--background);
     color: var(--foreground);
     font-family: 'IBM_Plex';
+    /* For working Resize Borders */
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    /* -------------------------- */
 }

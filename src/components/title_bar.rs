@@ -1,5 +1,5 @@
 use dioxus::prelude::*;
-use dioxus_free_icons::{Icon, icons::ld_icons::{LdMaximize, LdMaximize2, LdMinus, LdX}};
+use dioxus_free_icons::{Icon, icons::ld_icons::{LdMaximize2, LdMinus, LdX}};
 
 #[component]
 pub fn TitleBar() -> Element {

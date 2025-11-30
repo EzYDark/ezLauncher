@@ -160,8 +160,29 @@
   }
 }
 @layer utilities {
+  .absolute {
+    position: absolute;
+  }
   .relative {
     position: relative;
+  }
+  .-top-\[2px\] {
+    top: calc(2px * -1);
+  }
+  .-right-\[2px\] {
+    right: calc(2px * -1);
+  }
+  .-bottom-\[2px\] {
+    bottom: calc(2px * -1);
+  }
+  .-left-\[2px\] {
+    left: calc(2px * -1);
+  }
+  .z-50 {
+    z-index: 50;
+  }
+  .z-51 {
+    z-index: 51;
   }
   .container {
     width: 100%;
@@ -199,8 +220,14 @@
   .h-2\/5 {
     height: calc(2/5 * 100%);
   }
+  .h-4 {
+    height: calc(var(--spacing) * 4);
+  }
   .h-8 {
     height: calc(var(--spacing) * 8);
+  }
+  .h-\[calc\(100\%\+4px\)\] {
+    height: calc(100% + 4px);
   }
   .h-full {
     height: 100%;
@@ -220,8 +247,14 @@
   .w-2\/5 {
     width: calc(2/5 * 100%);
   }
+  .w-4 {
+    width: calc(var(--spacing) * 4);
+  }
   .w-8 {
     width: calc(var(--spacing) * 8);
+  }
+  .w-\[calc\(100\%\+4px\)\] {
+    width: calc(100% + 4px);
   }
   .w-full {
     width: 100%;
@@ -231,6 +264,30 @@
   }
   .border-collapse {
     border-collapse: collapse;
+  }
+  .cursor-e-resize {
+    cursor: e-resize;
+  }
+  .cursor-n-resize {
+    cursor: n-resize;
+  }
+  .cursor-ne-resize {
+    cursor: ne-resize;
+  }
+  .cursor-nw-resize {
+    cursor: nw-resize;
+  }
+  .cursor-s-resize {
+    cursor: s-resize;
+  }
+  .cursor-se-resize {
+    cursor: se-resize;
+  }
+  .cursor-sw-resize {
+    cursor: sw-resize;
+  }
+  .cursor-w-resize {
+    cursor: w-resize;
   }
   .resize {
     resize: both;
