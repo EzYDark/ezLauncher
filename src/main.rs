@@ -4,9 +4,13 @@ use dioxus_desktop::{Config, WindowBuilder};
 mod components;
 mod scripts;
 mod consts;
+mod fonts;
+mod css;
 
 use crate::components::main_layout::MainLayout;
 use crate::scripts::window_size_center::set_window_size_and_center;
+use crate::fonts::LoadFonts;
+use crate::css::LoadCSS;
 
 fn main() {
     dioxus::LaunchBuilder::new()
@@ -28,8 +32,8 @@ fn App() -> Element {
 
     rsx! {
         document::Link { rel: "icon", href: consts::FAVICON }
-        document::Link { rel: "stylesheet", href: consts::MAIN_CSS }
-        document::Link { rel: "stylesheet", href: consts::TAILWIND_CSS }
+        LoadCSS {}
+        LoadFonts {}
         MainLayout {}
     }
 }

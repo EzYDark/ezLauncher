@@ -1,0 +1,29 @@
+.custom-scrollbar::-webkit-scrollbar {
+    width: 0.6vh;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    cursor: default;
+    background: var(--background-light);
+    border-radius: 2px !important;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    cursor: default;
+    background: var(--background-lighter);
+    border-radius: 2px !important;
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:vertical {
+    cursor: default;
+    border-top-left-radius: 2px !important;
+    border-top-right-radius: 2px !important;
+    border-bottom-left-radius: 2px !important;
+    border-bottom-right-radius: 2px !important;
+}
+
+.custom-scrollbar::-webkit-scrollbar-button:single-button {
+    display: none !important;
+}

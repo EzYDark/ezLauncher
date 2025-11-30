@@ -1,0 +1,34 @@
+:root {
+    /* Base Colors */
+    --background: #2D2A2E;
+    --background-dark: #221F22;
+    --background-darker: #19181A;
+    --background-light: #403E41;
+    --background-lighter: #5B595C;
+    --foreground: #FCFCFA;
+
+    /* Accents */
+    --red: #f7505b;
+    --orange: #f98247;
+    --yellow: #f3ca4f;
+    --green: #67d765;
+    --blue: #55cfdd;
+    --purple: #9684f2;
+
+    /* UI Elements */
+    --grey: #727072;
+    --black: #19181a;
+    --border: #2D2A2E;
+    --border-dark: #1A191B;
+    --border-light: #5B595C;
+    --selection: #322d32;
+
+    /* Other elements */
+    --window-border: #252327;
+    
+    --minimize-btn-hover: #474647;
+    --maximize-btn-hover: #d2af45;
+    --close-btn-hover: #d03741;
+
+    --play-btn-hover: #59bc58;
+}
