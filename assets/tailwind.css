@@ -7,6 +7,9 @@
     'Noto Color Emoji';
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
     monospace;
+    --spacing: 0.25rem;
+    --text-sm: 0.875rem;
+    --text-sm--line-height: calc(1.25 / 0.875);
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
   }
@@ -178,14 +181,53 @@
       max-width: 96rem;
     }
   }
+  .flex {
+    display: flex;
+  }
   .table {
     display: table;
+  }
+  .h-1 {
+    height: calc(var(--spacing) * 1);
+  }
+  .h-1\/2 {
+    height: calc(1/2 * 100%);
+  }
+  .h-2 {
+    height: calc(var(--spacing) * 2);
+  }
+  .h-2\/5 {
+    height: calc(2/5 * 100%);
+  }
+  .h-8 {
+    height: calc(var(--spacing) * 8);
   }
   .h-full {
     height: 100%;
   }
+  .h-screen {
+    height: 100vh;
+  }
+  .w-1 {
+    width: calc(var(--spacing) * 1);
+  }
+  .w-1\/2 {
+    width: calc(1/2 * 100%);
+  }
+  .w-2 {
+    width: calc(var(--spacing) * 2);
+  }
+  .w-2\/5 {
+    width: calc(2/5 * 100%);
+  }
+  .w-8 {
+    width: calc(var(--spacing) * 8);
+  }
   .w-full {
     width: 100%;
+  }
+  .w-screen {
+    width: 100vw;
   }
   .border-collapse {
     border-collapse: collapse;
@@ -193,9 +235,43 @@
   .resize {
     resize: both;
   }
+  .flex-col {
+    flex-direction: column;
+  }
+  .items-center {
+    align-items: center;
+  }
+  .justify-between {
+    justify-content: space-between;
+  }
+  .justify-center {
+    justify-content: center;
+  }
   .border {
     border-style: var(--tw-border-style);
     border-width: 1px;
+  }
+  .border-\[var\(--background-dark\)\] {
+    border-color: var(--background-dark);
+  }
+  .border-\[var\(--background-darker\)\] {
+    border-color: var(--background-darker);
+  }
+  .bg-\[var\(--background-dark\)\] {
+    background-color: var(--background-dark);
+  }
+  .stroke-1 {
+    stroke-width: 1;
+  }
+  .pl-2 {
+    padding-left: calc(var(--spacing) * 2);
+  }
+  .text-sm {
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+  }
+  .text-\[var\(--background-lighter\)\] {
+    color: var(--background-lighter);
   }
   .underline {
     text-decoration-line: underline;
@@ -203,6 +279,60 @@
   .outline {
     outline-style: var(--tw-outline-style);
     outline-width: 1px;
+  }
+  .select-none {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  .group-hover\:text-\[var\(--background-darker\)\] {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        color: var(--background-darker);
+      }
+    }
+  }
+  .group-hover\:text-\[var\(--foreground\)\] {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        color: var(--foreground);
+      }
+    }
+  }
+  .hover\:bg-\[var\(--grey\)\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--grey);
+      }
+    }
+  }
+  .hover\:bg-\[var\(--red\)\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--red);
+      }
+    }
+  }
+  .hover\:bg-\[var\(--yellow\)\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--yellow);
+      }
+    }
+  }
+  .active\:bg-\[var\(--grey-dark\)\] {
+    &:active {
+      background-color: var(--grey-dark);
+    }
+  }
+  .active\:bg-\[var\(--red-dark\)\] {
+    &:active {
+      background-color: var(--red-dark);
+    }
+  }
+  .active\:bg-\[var\(--yellow-dark\)\] {
+    &:active {
+      background-color: var(--yellow-dark);
+    }
   }
 }
 @property --tw-border-style {

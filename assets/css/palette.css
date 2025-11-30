@@ -5,30 +5,38 @@
     --background-darker: #19181A;
     --background-light: #403E41;
     --background-lighter: #5B595C;
+
     --foreground: #FCFCFA;
-
-    /* Accents */
-    --red: #f7505b;
-    --orange: #f98247;
-    --yellow: #f3ca4f;
-    --green: #67d765;
-    --blue: #55cfdd;
-    --purple: #9684f2;
-
-    /* UI Elements */
-    --grey: #727072;
-    --black: #19181a;
+    
     --border: #2D2A2E;
     --border-dark: #1A191B;
     --border-light: #5B595C;
-    --selection: #322d32;
 
-    /* Other elements */
-    --window-border: #252327;
-    
-    --minimize-btn-hover: #474647;
-    --maximize-btn-hover: #d2af45;
-    --close-btn-hover: #d03741;
+    /* Accents */
+    --red: #ff6188;
+    --orange: #f59762;
+    --yellow: #ffd866;
+    --green: #a9dc76;
+    --blue: #78dce8;
+    --purple: #ab9df2;
+    --grey: #727072;
+    --black: #19181a;
 
-    --play-btn-hover: #59bc58;
+    --red-bright: #ff85a3;
+    --orange-bright: #ffb380;
+    --yellow-bright: #ffe68a;
+    --green-bright: #c4f091;
+    --blue-bright: #9af0fa;
+    --purple-bright: #c5b9ff;
+    --grey-bright: #8f8d8f;
+    --black-bright: #333133;
+
+    --red-dark: #d93d64;
+    --orange-dark: #d67a45;
+    --yellow-dark: #d9b546;
+    --green-dark: #8cbd5b;
+    --blue-dark: #5bbcc8;
+    --purple-dark: #8d7fd6;
+    --grey-dark: #575557;
+    --black-dark: #000000;
 }

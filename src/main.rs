@@ -19,7 +19,7 @@ fn main() {
                 WindowBuilder::new()
                     .with_always_on_top(false)
                     .with_decorations(false)
-                    .with_resizable(false)
+                    .with_resizable(true)
                     .with_title("ezLauncher")
             )
         })
