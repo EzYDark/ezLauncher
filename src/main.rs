@@ -1,4 +1,4 @@
-// #![windows_subsystem = "windows"]
+#![windows_subsystem = "windows"]
 
 use dioxus::prelude::*;
 use dioxus_desktop::{Config, WindowBuilder};

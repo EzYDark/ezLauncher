@@ -79,5 +79,21 @@ pub struct ClientDownload {
 
 #[derive(Debug, Deserialize)]
 pub struct AssetIndex {
+    pub id: String,
+    pub sha1: String,
+    pub size: u64,
+    #[serde(rename = "totalSize")]
+    pub total_size: u64,
     pub url: String,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct AssetObject {
+    pub hash: String,
+    pub size: u64,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct AssetsIndex {
+    pub objects: HashMap<String, AssetObject>,
 }
