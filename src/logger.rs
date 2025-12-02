@@ -23,14 +23,14 @@ impl log::Log for SimpleLogger {
             let msg = format!("{}", record.args());
             
             let level_color = match record.level() {
-                Level::Error => "ERROR".red(),
-                Level::Warn => "WARN".yellow(),
-                Level::Info => "INFO".green(),
-                Level::Debug => "DEBUG".blue(),
-                Level::Trace => "TRACE".magenta(),
+                Level::Error => "[ERROR]".red(),
+                Level::Warn => "[WARN]".yellow(),
+                Level::Info => "[INFO]".green(),
+                Level::Debug => "[DEBUG]".blue(),
+                Level::Trace => "[TRACE]".magenta(),
             };
 
-            println!("[{}] {}", level_color, msg);
+            println!("{} {}", level_color, msg);
             
             // Only write to signal if we are in a Dioxus runtime
             if Runtime::try_current().is_some() {
