@@ -167,9 +167,10 @@ async fn download_libraries_and_natives(mc_dir: &Path, manifest: &VersionManifes
 
             // Download natives if present
             if let Some(natives) = &library.natives {
-                if let Some(linux_classifier) = natives.get("linux") {
+                let os_key = if cfg!(target_os = "windows") { "windows" } else { "linux" };
+                if let Some(classifier) = natives.get(os_key) {
                     if let Some(classifiers) = &downloads.classifiers {
-                        if let Some(native_artifact) = classifiers.get(linux_classifier) {
+                        if let Some(native_artifact) = classifiers.get(classifier) {
                             let native_path = lib_dir.join(&native_artifact.path);
                             if !native_path.exists() {
                                 log::info!("Downloading native: {}", library.name);
@@ -188,10 +189,11 @@ async fn download_libraries_and_natives(mc_dir: &Path, manifest: &VersionManifes
 
     for library in &manifest.libraries {
         if let Some(natives) = &library.natives {
-            if let Some(linux_classifier) = natives.get("linux") {
+            let os_key = if cfg!(target_os = "windows") { "windows" } else { "linux" };
+            if let Some(classifier) = natives.get(os_key) {
                 if let Some(downloads) = &library.downloads {
                     if let Some(classifiers) = &downloads.classifiers {
-                        if let Some(native_artifact) = classifiers.get(linux_classifier) {
+                        if let Some(native_artifact) = classifiers.get(classifier) {
                             let native_jar = lib_dir.join(&native_artifact.path);
                             if native_jar.exists() {
                                 extract_natives(&native_jar, &natives_dir)?;

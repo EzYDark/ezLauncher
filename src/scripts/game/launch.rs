@@ -82,7 +82,8 @@ pub async fn launch_game(
     classpath.sort();
     classpath.dedup();
 
-    let classpath_str = classpath.join(":");
+    let separator = if cfg!(target_os = "windows") { ";" } else { ":" };
+    let classpath_str = classpath.join(separator);
     log::info!("Classpath: {}", classpath_str);
 
     // Build command
@@ -128,7 +129,7 @@ pub async fn launch_game(
                         .replace("${launcher_version}", "0.2.0")
                         .replace("${classpath}", &classpath_str)
                         .replace("${library_directory}", &mc_absolute.join("libraries").to_string_lossy())
-                        .replace("${classpath_separator}", ":")
+                        .replace("${classpath_separator}", separator)
                         .replace("${version_name}", MC_VERSION);
                     cmd.arg(substituted);
                 }
