@@ -26,6 +26,8 @@ pub fn LoginModal(show_modal: Signal<bool>) -> Element {
                     class: "border border-[var(--background-darker)] bg-[var(--background-dark)] text-[var(--text-dark)] p-2 px-4 rounded hover:bg-[var(--background-dark)] active:bg-[var(--background-light)] cursor-pointer",
                     onclick: move |_| {
                         spawn(async move {
+                            let window = dioxus_desktop::use_window();
+
                             match script::login().await {
                                 Ok(token) => {
                                     log::info!("Login successful! Token: {}", token);
@@ -46,6 +48,9 @@ pub fn LoginModal(show_modal: Signal<bool>) -> Element {
                                     // TODO: Show error to user
                                 }
                             }
+
+                            window.set_minimized(false);
+                            window.set_focus();
                         });
                     },
                     "Log In"
