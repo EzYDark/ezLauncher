@@ -28,21 +28,21 @@ pub fn LoginModal(show_modal: Signal<bool>) -> Element {
                         spawn(async move {
                             match script::login().await {
                                 Ok(token) => {
-                                    println!("Login successful! Token: {}", token);
+                                    log::info!("Login successful! Token: {}", token);
                                     match script::fetch_user_info(&token).await {
                                         Ok(user_info) => {
-                                            println!("User Info: {:?}", user_info);
+                                            log::info!("User Info: {:?}", user_info);
                                             state::AUTH.write().token = Some(token);
                                             state::AUTH.write().user = Some(user_info);
                                         }
                                         Err(e) => {
-                                            println!("Failed to fetch user info: {}", e);
+                                            log::error!("Failed to fetch user info: {}", e);
                                         }
                                     }
                                     show_modal.set(false);
                                 }
                                 Err(e) => {
-                                    println!("Login error: {}", e);
+                                    log::error!("Login error: {}", e);
                                     // TODO: Show error to user
                                 }
                             }

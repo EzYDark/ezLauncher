@@ -33,11 +33,11 @@ pub async fn login() -> anyhow::Result<String> {
     
     // Open the browser
     if let Err(e) = webbrowser::open(auth_url.as_str()) {
-        println!("Failed to open browser: {}", e);
+        log::error!("Failed to open browser: {}", e);
     }
 
     // Wait for the callback
-    println!("Waiting for callback...");
+    log::info!("Waiting for callback...");
     let (mut stream, _) = listener.accept().await?;
     
     let mut buffer = [0; 2048];
@@ -69,7 +69,7 @@ pub async fn login() -> anyhow::Result<String> {
         .request_async(async_http_client)
         .await
         .map_err(|e| {
-            println!("Token exchange error: {:?}", e);
+            log::error!("Token exchange error: {:?}", e);
             anyhow::anyhow!("Token exchange failed: {:?}", e)
         })?;
 

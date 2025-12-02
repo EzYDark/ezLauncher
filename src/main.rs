@@ -8,6 +8,7 @@ mod fonts;
 mod css;
 mod state;
 mod secrets;
+mod logger;
 
 use crate::components::main_layout::MainLayout;
 use crate::scripts::window_size_center::set_window_size_and_center;
@@ -15,6 +16,7 @@ use crate::fonts::LoadFonts;
 use crate::css::LoadCSS;
 
 fn main() {
+    logger::init().unwrap();
     dioxus::LaunchBuilder::new()
         .with_cfg(desktop! {
             Config::new().with_window(
