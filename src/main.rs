@@ -6,6 +6,8 @@ mod scripts;
 mod consts;
 mod fonts;
 mod css;
+mod state;
+mod secrets;
 
 use crate::components::main_layout::MainLayout;
 use crate::scripts::window_size_center::set_window_size_and_center;
