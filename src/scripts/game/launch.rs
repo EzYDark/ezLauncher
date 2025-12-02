@@ -1,8 +1,8 @@
-use anyhow::Result;
-use std::path::PathBuf;
 use super::types::*;
 use super::utils::check_rules;
-use super::{MC_VERSION, ELY_BY_API};
+use super::{ELY_BY_API, MC_VERSION};
+use anyhow::Result;
+use std::path::PathBuf;
 
 pub async fn launch_game(
     mc_dir: PathBuf,
@@ -47,16 +47,24 @@ pub async fn launch_game(
             if let Some(artifact) = &downloads.artifact {
                 let lib_path = lib_dir.join(&artifact.path);
                 let lib_filename = lib_path.file_name().unwrap_or_default().to_string_lossy();
-                
+
                 // Skip if in ignore list
-                if ignore_list.iter().any(|ignore| lib_filename == *ignore || (ignore.ends_with("-") && lib_filename.starts_with(ignore))) {
+                if ignore_list.iter().any(|ignore| {
+                    lib_filename == *ignore
+                        || (ignore.ends_with("-") && lib_filename.starts_with(ignore))
+                }) {
                     log::info!("Ignoring library: {}", lib_filename);
                     continue;
                 }
 
                 if lib_path.exists() {
                     if let Ok(absolute) = std::fs::canonicalize(&lib_path) {
-                        classpath.push(absolute.to_string_lossy().to_string());
+                        classpath.push(
+                            absolute
+                                .to_string_lossy()
+                                .trim_start_matches(r"\\?\")
+                                .to_string(),
+                        );
                     }
                 }
             }
@@ -72,7 +80,12 @@ pub async fn launch_game(
             .join(MC_VERSION)
             .join(&client_jar_name);
         if let Ok(absolute) = std::fs::canonicalize(&client_jar) {
-            classpath.push(absolute.to_string_lossy().to_string());
+            classpath.push(
+                absolute
+                    .to_string_lossy()
+                    .trim_start_matches(r"\\?\")
+                    .to_string(),
+            );
         }
     } else {
         log::info!("Ignoring client JAR: {}", client_jar_name);
@@ -82,7 +95,11 @@ pub async fn launch_game(
     classpath.sort();
     classpath.dedup();
 
-    let separator = if cfg!(target_os = "windows") { ";" } else { ":" };
+    let separator = if cfg!(target_os = "windows") {
+        ";"
+    } else {
+        ":"
+    };
     let classpath_str = classpath.join(separator);
     log::info!("Classpath: {}", classpath_str);
 
@@ -90,7 +107,7 @@ pub async fn launch_game(
     let java_absolute = std::fs::canonicalize(&java_path)?;
     let mc_absolute = std::fs::canonicalize(&mc_dir)?;
     let natives_absolute = std::fs::canonicalize(mc_dir.join("natives"))?;
-    
+
     let mut cmd = tokio::process::Command::new(&java_absolute);
     cmd.current_dir(&mc_absolute);
 
@@ -98,13 +115,16 @@ pub async fn launch_game(
     cmd.arg("-Xmx4G").arg("-Xms1G");
 
     // Authlib-injector for Ely.by authentication
-    let authlib_path = mc_dir.parent()
+    let authlib_path = mc_dir
+        .parent()
         .ok_or_else(|| anyhow::anyhow!("Invalid mc_dir"))?
         .join("authlib-injector.jar");
     if let Ok(authlib_absolute) = std::fs::canonicalize(&authlib_path) {
         cmd.arg(format!(
             "-javaagent:{}={}",
-            authlib_absolute.to_string_lossy(),
+            authlib_absolute
+                .to_string_lossy()
+                .trim_start_matches(r"\\?\"),
             ELY_BY_API
         ));
     }
@@ -112,7 +132,9 @@ pub async fn launch_game(
     // Native library path
     cmd.arg(format!(
         "-Djava.library.path={}",
-        natives_absolute.to_string_lossy()
+        natives_absolute
+            .to_string_lossy()
+            .trim_start_matches(r"\\?\")
     ));
 
     // Classpath
@@ -124,11 +146,22 @@ pub async fn launch_game(
             for arg in jvm_args {
                 if let serde_json::Value::String(s) = arg {
                     let substituted = s
-                        .replace("${natives_directory}", &natives_absolute.to_string_lossy())
+                        .replace(
+                            "${natives_directory}",
+                            natives_absolute
+                                .to_string_lossy()
+                                .trim_start_matches(r"\\?\"),
+                        )
                         .replace("${launcher_name}", "ezLauncher")
                         .replace("${launcher_version}", "0.2.0")
                         .replace("${classpath}", &classpath_str)
-                        .replace("${library_directory}", &mc_absolute.join("libraries").to_string_lossy())
+                        .replace(
+                            "${library_directory}",
+                            mc_absolute
+                                .join("libraries")
+                                .to_string_lossy()
+                                .trim_start_matches(r"\\?\"),
+                        )
                         .replace("${classpath_separator}", separator)
                         .replace("${version_name}", MC_VERSION);
                     cmd.arg(substituted);
@@ -148,8 +181,17 @@ pub async fn launch_game(
                     let substituted = s
                         .replace("${auth_player_name}", &username)
                         .replace("${version_name}", MC_VERSION)
-                        .replace("${game_directory}", &mc_absolute.to_string_lossy())
-                        .replace("${assets_root}", &mc_absolute.join("assets").to_string_lossy())
+                        .replace(
+                            "${game_directory}",
+                            mc_absolute.to_string_lossy().trim_start_matches(r"\\?\"),
+                        )
+                        .replace(
+                            "${assets_root}",
+                            mc_absolute
+                                .join("assets")
+                                .to_string_lossy()
+                                .trim_start_matches(r"\\?\"),
+                        )
                         .replace("${assets_index_name}", MC_VERSION)
                         .replace("${auth_uuid}", &uuid)
                         .replace("${auth_access_token}", &token)
