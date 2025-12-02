@@ -109,6 +109,7 @@ pub async fn launch_game(
     let natives_absolute = std::fs::canonicalize(mc_dir.join("natives"))?;
 
     let mut cmd = tokio::process::Command::new(&java_absolute);
+
     cmd.current_dir(&mc_absolute);
 
     // Memory args

@@ -1,8 +1,8 @@
+use super::utils::download_file;
 use anyhow::Result;
 use reqwest::Client;
 use serde::Deserialize;
 use std::path::{Path, PathBuf};
-use super::utils::download_file;
 
 #[derive(Debug, Deserialize)]
 struct AdoptiumRelease {
@@ -22,9 +22,9 @@ struct AdoptiumPackage {
 pub async fn install_java(base_dir: &Path) -> Result<PathBuf> {
     let java_dir = base_dir.join("java");
     let jdk_dir = java_dir.join("jdk-21.0.9+10");
-    
+
     let java_bin = if cfg!(target_os = "windows") {
-        jdk_dir.join("bin").join("java.exe")
+        jdk_dir.join("bin").join("javaw.exe")
     } else {
         jdk_dir.join("bin").join("java")
     };
@@ -35,14 +35,18 @@ pub async fn install_java(base_dir: &Path) -> Result<PathBuf> {
     }
 
     log::info!("Downloading Java 21...");
-    let client = Client::builder()
-        .user_agent("ezLauncher/0.2.0")
-        .build()?;
+    let client = Client::builder().user_agent("ezLauncher/0.2.0").build()?;
 
     let (url, ext) = if cfg!(target_os = "windows") {
-        ("https://api.adoptium.net/v3/assets/latest/21/hotspot?architecture=x64&image_type=jdk&os=windows&vendor=eclipse", "zip")
+        (
+            "https://api.adoptium.net/v3/assets/latest/21/hotspot?architecture=x64&image_type=jdk&os=windows&vendor=eclipse",
+            "zip",
+        )
     } else {
-        ("https://api.adoptium.net/v3/assets/latest/21/hotspot?architecture=x64&image_type=jdk&os=linux&vendor=eclipse", "tar.gz")
+        (
+            "https://api.adoptium.net/v3/assets/latest/21/hotspot?architecture=x64&image_type=jdk&os=linux&vendor=eclipse",
+            "tar.gz",
+        )
     };
 
     let releases: Vec<AdoptiumRelease> = client.get(url).send().await?.json().await?;
@@ -62,7 +66,8 @@ pub async fn install_java(base_dir: &Path) -> Result<PathBuf> {
         let java_dir_clone = java_dir.clone();
         tokio::task::spawn_blocking(move || {
             super::utils::extract_zip(&archive_path_clone, &java_dir_clone)
-        }).await??;
+        })
+        .await??;
     } else {
         tokio::process::Command::new("tar")
             .arg("-xzf")
