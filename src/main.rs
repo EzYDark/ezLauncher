@@ -7,7 +7,6 @@ mod consts;
 mod fonts;
 mod css;
 mod state;
-mod game;
 mod secrets;
 mod logger;
 
