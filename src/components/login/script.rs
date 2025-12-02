@@ -91,6 +91,7 @@ pub struct UserInfo {
     pub username: String,
     pub email: Option<String>,
     pub skin_url: String,
+    pub access_token: String,
 }
 
 pub async fn fetch_user_info(token: &str) -> anyhow::Result<UserInfo> {
@@ -113,5 +114,6 @@ pub async fn fetch_user_info(token: &str) -> anyhow::Result<UserInfo> {
         skin_url: format!("http://skinsystem.ely.by/skins/{}.png", api_response.username),
         username: api_response.username,
         email: api_response.email,
+        access_token: token.to_string(),
     })
 }

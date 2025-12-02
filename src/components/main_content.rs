@@ -31,7 +31,22 @@ pub fn MainContent() -> Element {
                 p { class: "text-sm text-gray-500", "UUID: {user.uuid}" }
                 button {
                     class: "bg-[var(--background-dark)] text-[var(--text-dark)] p-2 px-4 rounded hover:bg-[var(--background-dark)] active:bg-[var(--background-light)] cursor-pointer",
-                    onclick: move |_| {},
+                    onclick: move |_| {
+                        spawn(async move {
+                            if let Some(user) = &AUTH().user {
+                                match crate::game::launch(
+                                        user.username.clone(),
+                                        user.uuid.clone(),
+                                        user.access_token.clone(),
+                                    )
+                                    .await
+                                {
+                                    Ok(_) => log::info!("Game launched successfully"),
+                                    Err(e) => log::error!("Game launch failed: {:?}", e),
+                                }
+                            }
+                        });
+                    },
                     "Play"
                 }
             } else {
