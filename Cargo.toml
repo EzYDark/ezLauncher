@@ -21,8 +21,9 @@ sha2 = "0.10.9"
 base64 = "0.22.1"
 oauth2 = "4.4"
 tokio = { version = "1.48.0", features = ["full"] }
-log = "0.4.28"
+log = "0.4.29"
 colored = "3.0.0"
+dirs = "6.0.0"
 
 [features]
 default = ["desktop"]

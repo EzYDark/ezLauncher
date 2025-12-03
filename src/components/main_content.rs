@@ -31,7 +31,7 @@ pub fn MainContent() -> Element {
                 p { class: "text-sm text-gray-500", "UUID: {user.uuid}" }
                 button {
                     class: "bg-[var(--background-dark)] text-[var(--text-dark)] p-2 px-4 rounded hover:bg-[var(--background-dark)] active:bg-[var(--background-light)] cursor-pointer",
-                    onclick: move |_| {},
+                    onclick: move |_| async {},
                     "Play"
                 }
             } else {
