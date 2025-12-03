@@ -2,18 +2,18 @@ use dioxus::prelude::*;
 use dioxus_desktop::{Config, WindowBuilder};
 
 mod components;
-mod scripts;
 mod consts;
-mod fonts;
 mod css;
-mod state;
-mod secrets;
+mod fonts;
 mod logger;
+mod scripts;
+mod secrets;
+mod state;
 
 use crate::components::main_layout::MainLayout;
-use crate::scripts::window_size_center::set_window_size_and_center;
-use crate::fonts::LoadFonts;
 use crate::css::LoadCSS;
+use crate::fonts::LoadFonts;
+use crate::scripts::window_size_center::set_window_size_and_center;
 
 fn main() {
     logger::init().unwrap();
